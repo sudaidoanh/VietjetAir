@@ -5,26 +5,26 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.", "1.", "{5A30130C-2D18-4183-8D40-3B54DC818393}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.", "2.", "{CCC956DB-25A8-45EB-832E-CC7DE9438D90}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Models", "2. Models", "{CCC956DB-25A8-45EB-832E-CC7DE9438D90}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.", "3.", "{BA891AF1-1D89-45E1-9887-F03549CC8C93}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Controllers", "3. Controllers", "{BA891AF1-1D89-45E1-9887-F03549CC8C93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6AF6590-E18E-47B8-8DBD-753A09EB6B2C}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietjetAir.Utilities", "VietjetAir.Utilities\VietjetAir.Utilities.csproj", "{7A61A2CB-1CAA-4281-B173-ECC48D8E2DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VietjetAir.Utilities", "VietjetAir.Utilities\VietjetAir.Utilities.csproj", "{7A61A2CB-1CAA-4281-B173-ECC48D8E2DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietjetAir.ViewModels", "VietjetAir.ViewModels\VietjetAir.ViewModels.csproj", "{635E928D-1588-473A-9D49-56A40CE7C744}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VietjetAir.ViewModels", "VietjetAir.ViewModels\VietjetAir.ViewModels.csproj", "{635E928D-1588-473A-9D49-56A40CE7C744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietjetAir.Application", "VietjetAir.Application\VietjetAir.Application.csproj", "{CF6CE3AD-4496-4780-82BE-615397F40862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VietjetAir.Application", "VietjetAir.Application\VietjetAir.Application.csproj", "{CF6CE3AD-4496-4780-82BE-615397F40862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietjecAir.Data", "VietjecAir.Data\VietjecAir.Data.csproj", "{C08D4BC9-4128-49E2-95B4-885C55807079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VietjecAir.Data", "VietjecAir.Data\VietjecAir.Data.csproj", "{C08D4BC9-4128-49E2-95B4-885C55807079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietjetAir.WebApplication", "VietjetAir.WebApplication\VietjetAir.WebApplication.csproj", "{37973AF1-E8C5-49CE-BF8F-52343555D47A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VietjetAir.WebApplication", "VietjetAir.WebApplication\VietjetAir.WebApplication.csproj", "{37973AF1-E8C5-49CE-BF8F-52343555D47A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietjetAir.BackendAPI", "VietjetAir.BackendAPI\VietjetAir.BackendAPI.csproj", "{CBDF0E81-CB8E-43A9-B4AF-B50EB1F49150}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VietjetAir.BackendAPI", "VietjetAir.BackendAPI\VietjetAir.BackendAPI.csproj", "{CBDF0E81-CB8E-43A9-B4AF-B50EB1F49150}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
