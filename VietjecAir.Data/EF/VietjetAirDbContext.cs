@@ -19,6 +19,7 @@ namespace VietjecAir.Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new PointConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserConfigurationcs());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
 
@@ -35,5 +36,7 @@ namespace VietjecAir.Data.EF
 
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Point> Points { get; set; }
+        public DbSet<Flight> Flights{ get; set; }
     }
 }

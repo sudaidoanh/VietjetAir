@@ -31,3 +31,6 @@
 - Create form fluent validation for email and password
 - Create login API Authenticate with email and password (AspNetCore.Identity),  Attempts a password sign in for a user. If the data matches the database, login successfully, the server will return a jwt
 (The user account wought be locked if the sign in fails.) 
+## 25/5 - 29/5:
+- Create Database relates to user requiments 
+- Database configuration User management and Permission
