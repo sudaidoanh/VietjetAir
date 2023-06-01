@@ -19,12 +19,16 @@ namespace VietjecAir.Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new PointConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserConfigurationcs());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfigurationcs());
+            modelBuilder.ApplyConfiguration(new DocumentConfiguration());
+            modelBuilder.ApplyConfiguration(new DocumentDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new DocumentTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FlightConfiguration());
-            modelBuilder.ApplyConfiguration(new GroupMemberConfiguration());
             modelBuilder.ApplyConfiguration(new GroupConfiguration());
+            modelBuilder.ApplyConfiguration(new GroupMemberConfiguration());
+            modelBuilder.ApplyConfiguration(new PermissionConfiguration());
+            modelBuilder.ApplyConfiguration(new PointConfiguration());
 
 
             modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
@@ -39,10 +43,14 @@ namespace VietjecAir.Data.EF
 
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Data.Entities.Document> Documents { get; set; }
+        public DbSet<DocumentDetail> DocumentsDetail { get; set; }
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
         public DbSet<Point> Points { get; set; }
         public DbSet<Flight> Flights{ get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
-        public DbSet<Data.Entities.Document> Documents { get; set; }
+
     }
 }

@@ -9,6 +9,7 @@ using VietjecAir.Data.EF;
 using VietjecAir.Data.Entities;
 using VietjetAir.Application.Systems.Users;
 using VietjetAir.Utilities.Constants;
+using VietjetAir.ViewModels.Catalog.GroupPermission;
 using VietjetAir.ViewModels.Systems.Users;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,15 +19,21 @@ builder.Services.AddDbContext<VietjetAirDbContext>(options => options.UseSqlServ
 
 builder.Services.AddIdentity<AppUser, AppRole>()
     .AddEntityFrameworkStores<VietjetAirDbContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddRoles<AppRole>();
+
+/*builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<VietjetAirDbContext>();*/
 
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>();
 
 builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+
 
 builder.Services.AddControllers();
 
@@ -69,12 +76,11 @@ string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
 string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
 byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
 
-builder.Services.AddAuthentication(opt =>
+builder.Services.AddAuthentication(options =>
 {
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-
 .AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
@@ -104,6 +110,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseAuthentication();
 
 app.UseRouting();
 

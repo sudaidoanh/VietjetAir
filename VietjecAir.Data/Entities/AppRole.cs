@@ -11,6 +11,5 @@ namespace VietjecAir.Data.Entities
     {
         public string Description { get; set; }
         public string Action { get; set; }
-        public string Permission { get; set; }
     }
 }

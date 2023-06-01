@@ -15,7 +15,8 @@ namespace VietjecAir.Data.Configurations
         {
             builder.ToTable("Flights");
             builder.HasKey(x => x.FlightNo);
-
+            builder.Property(x => x.PointofLoading).IsRequired();
+            builder.Property(x => x.PointofUnloading).IsRequired();
         }
     }
 }

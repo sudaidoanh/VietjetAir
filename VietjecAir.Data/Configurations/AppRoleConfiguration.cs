@@ -16,7 +16,6 @@ namespace VietjecAir.Data.Configurations
             builder.ToTable("AppRoles");
             builder.Property(x => x.Description).IsRequired().HasMaxLength(300);
             builder.Property(x => x.Action).IsRequired().HasMaxLength(60);
-            builder.Property(x => x.Permission).HasMaxLength(60);
         }
     }
 }

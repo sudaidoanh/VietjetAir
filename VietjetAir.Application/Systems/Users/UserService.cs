@@ -50,10 +50,11 @@ namespace VietjetAir.Application.Systems.Users
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_config["Tokens:Issuer"],
+            var token = new JwtSecurityToken(
+                _config["Tokens:Issuer"],
                 _config["Tokens:Issuer"],
                 claims,
-                expires: DateTime.Now.AddHours(5),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds
                 );
 

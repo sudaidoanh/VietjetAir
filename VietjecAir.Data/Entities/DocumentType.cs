@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace VietjecAir.Data.Entities
 {
-    public class Group
+    public class DocumentType
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Created { get; set; }
-        public string Creator { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public Guid Creator { get; set; }
         public string Note { get; set; }
-        public List<GroupMember> groupMembers { get; set; }
         public List<Permission> permissions { get; set; }
     }
 }

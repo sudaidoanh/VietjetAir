@@ -101,6 +101,11 @@ namespace VietjecAir.Data.Migrations
                     b.HasData(
                         new
                         {
+                            UserId = new Guid("6d8cc029-fe13-4a37-b241-39dafbbc94ba"),
+                            RoleId = new Guid("944bd118-0128-412b-b6af-0e96921d64b7")
+                        },
+                        new
+                        {
                             UserId = new Guid("612e9def-cd18-4210-9f71-0101ea527cb3"),
                             RoleId = new Guid("4857318f-ea9e-4250-aaf2-5b0344e1486e")
                         },
@@ -166,11 +171,6 @@ namespace VietjecAir.Data.Migrations
                     b.Property<string>("NormalizedName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Permission")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles", (string)null);
@@ -178,43 +178,48 @@ namespace VietjecAir.Data.Migrations
                     b.HasData(
                         new
                         {
+                            Id = new Guid("944bd118-0128-412b-b6af-0e96921d64b7"),
+                            Action = "Owner",
+                            ConcurrencyStamp = "2cd705ee-0969-4806-a3f6-2c94209ea67a",
+                            Description = "Owner have full access to the system and use all existing functions, manage and decentralize user classes include administrator.",
+                            Name = "Owner",
+                            NormalizedName = "Owner"
+                        },
+                        new
+                        {
                             Id = new Guid("4857318f-ea9e-4250-aaf2-5b0344e1486e"),
-                            Action = "Adminstrator",
-                            ConcurrencyStamp = "9c293202-ba69-4367-8b96-785bde9932cb",
+                            Action = "Administrators",
+                            ConcurrencyStamp = "8fa1ef2d-0f8c-41dc-a1fa-9ae25ddc6764",
                             Description = "Administrators have full access to the system and use all existing functions, manage and decentralize user classes.",
-                            Name = "Adminstrator",
-                            NormalizedName = "Adminstrator",
-                            Permission = "All Permission"
+                            Name = "Administrators",
+                            NormalizedName = "Administrators"
                         },
                         new
                         {
                             Id = new Guid("1706e285-cee8-495e-8f1d-4f3db18e975b"),
                             Action = "GOStaff",
-                            ConcurrencyStamp = "486be97b-d1f4-48f8-b97d-2c346989600e",
+                            ConcurrencyStamp = "8546389c-7294-4945-adb0-25287a977542",
                             Description = "Functions: view information, update and upload documents, fill out document information; see the history of changes to the document… users can set up functions that allow viewing or editing of documents for specific groups of users.",
                             Name = "GOStaff",
-                            NormalizedName = "GOStaff",
-                            Permission = "Grant, Modify, Read"
+                            NormalizedName = "GOStaff"
                         },
                         new
                         {
                             Id = new Guid("6ff5fb0c-912a-446f-bf64-fcec3532dd01"),
                             Action = "Pilot",
-                            ConcurrencyStamp = "9d34aa1c-43f5-4520-8c2f-9c75655245a0",
+                            ConcurrencyStamp = "58fca573-5fa1-4d5a-986f-cfe2f5c0aac6",
                             Description = "Access to the system to view the document information about the assigned flight, edit and update the document information when authorized.",
                             Name = "Pilot",
-                            NormalizedName = "Pilot",
-                            Permission = "No Permission"
+                            NormalizedName = "Pilot"
                         },
                         new
                         {
                             Id = new Guid("f5917976-7e77-4190-8561-f4366f1cf612"),
                             Action = "Attendant",
-                            ConcurrencyStamp = "b0b8603c-e0bc-40df-b00e-15a0a0795cb1",
+                            ConcurrencyStamp = "7f083c0d-a63a-4c30-87e8-43eaa98d8a6b",
                             Description = "Attendant access to the system to view the document information about the assigned flight, edit and update the document information when authorized.",
                             Name = "Attendant",
-                            NormalizedName = "Attendant",
-                            Permission = "No Permission"
+                            NormalizedName = "Attendant"
                         });
                 });
 
@@ -287,17 +292,36 @@ namespace VietjecAir.Data.Migrations
                     b.HasData(
                         new
                         {
+                            Id = new Guid("6d8cc029-fe13-4a37-b241-39dafbbc94ba"),
+                            AccessFailedCount = 10,
+                            Address = "Ho Chi Minh City",
+                            ConcurrencyStamp = "f0f2e752-8120-44f9-b002-8860bf405ac6",
+                            Email = "owner@vietjetair.com",
+                            EmailConfirmed = true,
+                            FullName = "Owner",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "owner@vietjetair.com",
+                            NormalizedUserName = "owner",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPCiHipoSFTSf6E0hbRjrgeK0PJ4JylRwPHIPhCMrQmt5SSRCkiuTZqFSBFfjOyypg==",
+                            PhoneNumber = "0223456789",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "owner"
+                        },
+                        new
+                        {
                             Id = new Guid("612e9def-cd18-4210-9f71-0101ea527cb3"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "7b7c687c-6e29-45da-acba-883f00748e9f",
+                            ConcurrencyStamp = "401c2876-c925-49ad-aafc-2223f173d981",
                             Email = "admin@vietjetair.com",
                             EmailConfirmed = true,
-                            FullName = "Adminstrator",
+                            FullName = "Administrators",
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@vietjetair.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFt9LlJxKyz/annH8z9FiI8AUnEw6iW9G2GoGoSn/yvISJixX5OWPemPmH3p6QtV4g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAlSLIUrNIFfwVRLhw0Md5FprtvlGXnjeBVcdITHn97R5ZXqo3vU9uWAf7D9Yux3nw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -309,14 +333,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("7407b801-0f91-4732-9179-c24d56a353b5"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "8002740a-b1fe-47fc-9ac0-e036681de64e",
+                            ConcurrencyStamp = "c370ace3-8629-4eae-8fc2-85888a4c3a96",
                             Email = "gostaff@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "GO Staff",
                             LockoutEnabled = false,
                             NormalizedEmail = "gostaff@vietjetair.com",
                             NormalizedUserName = "GOStaff",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEEVN4qB7RcAPAyCdGq5Y/Kavv4XLEUy1c7eChR+TvXi+NE6icxJ6i8caFjdpr3MPg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECmj0H55M1hAaxriuIEXYuA2LBEQze3aBGHomcIFZzNFJ3vybMA/YRjB01wh5zfuvg==",
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -328,14 +352,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("f8814825-284e-44d0-ac12-c69a097ca81c"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "560f22f3-048f-470c-a4a7-cd06cda2b103",
+                            ConcurrencyStamp = "739df151-553b-4d58-b4f4-76579994c24a",
                             Email = "pilot@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "Pilot",
                             LockoutEnabled = false,
                             NormalizedEmail = "pilot@vietjetair.com",
                             NormalizedUserName = "pilot",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAPnd4YSv3UztfnmW2wTLpwyDO588usenCklOVtRuxjTMaVzuAO8yJ8iITZiQFumpQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFAnnmE8Teh9spEaV8LeFuHJdttU0Xy3VQJqw3LDHJJtIocb4Gv1Wex2kmX2Mp0zYQ==",
                             PhoneNumber = "0122222222",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -347,14 +371,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("73b3e5f4-20a8-4db4-8cb7-8a7151429cb5"),
                             AccessFailedCount = 10,
                             Address = "Dong Ha Quang Tri",
-                            ConcurrencyStamp = "40d58690-b54e-454e-9167-5bf048a2a798",
+                            ConcurrencyStamp = "7737aeef-f13a-41e6-b277-304eb091d82b",
                             Email = "attendant@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "Attendant ",
                             LockoutEnabled = false,
                             NormalizedEmail = "attendant@vietjetair.com",
                             NormalizedUserName = "attendant",
-                            PasswordHash = "AQAAAAEAACcQAAAAENiEa2HjsTnbjXbXi8VbAiWwDqFu5CtVOptePb8956osmc7cBMe5e77g6Hjato3bPw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMkQKEAbX5GqwtczZmbT5j7rda6Ffsdhk8FmWfcGvlrFDKqSF3U/Eg5YV1Be8xmm8A==",
                             PhoneNumber = "0967145696",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -371,17 +395,98 @@ namespace VietjecAir.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Creator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Version")
+                    b.Property<int>("DocumentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlightId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Documents", (string)null);
+                });
+
+            modelBuilder.Entity("VietjecAir.Data.Entities.DocumentDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id", "DocumentId");
+
+                    b.HasIndex("DocumentId");
+
+                    b.ToTable("DocumentDetails", (string)null);
+                });
+
+            modelBuilder.Entity("VietjecAir.Data.Entities.DocumentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Creator")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("DocumentTypes", (string)null);
                 });
 
             modelBuilder.Entity("VietjecAir.Data.Entities.Flight", b =>
@@ -397,6 +502,14 @@ namespace VietjecAir.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PointofUnloading")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeLoading")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeUnloading")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -451,6 +564,26 @@ namespace VietjecAir.Data.Migrations
                     b.ToTable("GroupMembers", (string)null);
                 });
 
+            modelBuilder.Entity("VietjecAir.Data.Entities.Permission", b =>
+                {
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DocumentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Permissions")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("GroupId", "DocumentTypeId");
+
+                    b.HasIndex("DocumentTypeId");
+
+                    b.ToTable("Permissions", (string)null);
+                });
+
             modelBuilder.Entity("VietjecAir.Data.Entities.Point", b =>
                 {
                     b.Property<string>("Id")
@@ -475,6 +608,17 @@ namespace VietjecAir.Data.Migrations
                     b.ToTable("Points", (string)null);
                 });
 
+            modelBuilder.Entity("VietjecAir.Data.Entities.DocumentDetail", b =>
+                {
+                    b.HasOne("VietjecAir.Data.Entities.Document", "Document")
+                        .WithMany("Details")
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Document");
+                });
+
             modelBuilder.Entity("VietjecAir.Data.Entities.GroupMember", b =>
                 {
                     b.HasOne("VietjecAir.Data.Entities.Group", "Group")
@@ -494,14 +638,45 @@ namespace VietjecAir.Data.Migrations
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("VietjecAir.Data.Entities.Permission", b =>
+                {
+                    b.HasOne("VietjecAir.Data.Entities.DocumentType", "DocumentType")
+                        .WithMany("permissions")
+                        .HasForeignKey("DocumentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VietjecAir.Data.Entities.Group", "Group")
+                        .WithMany("permissions")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DocumentType");
+
+                    b.Navigation("Group");
+                });
+
             modelBuilder.Entity("VietjecAir.Data.Entities.AppUser", b =>
                 {
                     b.Navigation("groupMembers");
                 });
 
+            modelBuilder.Entity("VietjecAir.Data.Entities.Document", b =>
+                {
+                    b.Navigation("Details");
+                });
+
+            modelBuilder.Entity("VietjecAir.Data.Entities.DocumentType", b =>
+                {
+                    b.Navigation("permissions");
+                });
+
             modelBuilder.Entity("VietjecAir.Data.Entities.Group", b =>
                 {
                     b.Navigation("groupMembers");
+
+                    b.Navigation("permissions");
                 });
 #pragma warning restore 612, 618
         }

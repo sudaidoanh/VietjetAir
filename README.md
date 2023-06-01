@@ -34,3 +34,6 @@
 ## 25/5 - 29/5:
 - Create Database relates to user requiments 
 - Database configuration User management and Permission
+## 29/5 - 1/6:
+- Integrated user rights to access API
+- Create CRUD API for group permissions including: view group list with pagination, create group, update group, remove group, view group details
