@@ -7,9 +7,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using VietjecAir.Data.EF;
 using VietjecAir.Data.Entities;
+using VietjetAir.Application.Catalog.GroupPermission;
+using VietjetAir.Application.Common;
+using VietjetAir.Application.Systems.Settings;
 using VietjetAir.Application.Systems.Users;
 using VietjetAir.Utilities.Constants;
-using VietjetAir.ViewModels.Catalog.GroupPermission;
 using VietjetAir.ViewModels.Systems.Users;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,9 +31,10 @@ builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
+builder.Services.AddTransient<IStorageService, FileStorageService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>();
-
+builder.Services.AddTransient<ISettingService, SettingService>();
 builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
 

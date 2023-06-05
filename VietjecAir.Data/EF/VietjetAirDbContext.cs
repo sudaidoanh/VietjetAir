@@ -29,6 +29,7 @@ namespace VietjecAir.Data.EF
             modelBuilder.ApplyConfiguration(new GroupMemberConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfiguration());
             modelBuilder.ApplyConfiguration(new PointConfiguration());
+            modelBuilder.ApplyConfiguration(new SystemConfiguration());
 
 
             modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
@@ -51,6 +52,7 @@ namespace VietjecAir.Data.EF
         public DbSet<Flight> Flights{ get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
+        public DbSet<Entities.System> ConfigureSystems { get; set; }
 
     }
 }

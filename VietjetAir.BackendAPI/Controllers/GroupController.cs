@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VietjetAir.Application.Catalog.GroupPermission;
 using VietjetAir.ViewModels.Catalog.GroupPermission;
 using VietjetAir.ViewModels.Common;
 
@@ -27,6 +28,7 @@ namespace VietjetAir.BackendAPI.Controllers
             }
             return Ok(data);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateGroup(CreateGroupRequest request)
         {
@@ -42,7 +44,7 @@ namespace VietjetAir.BackendAPI.Controllers
             if (data == null)
             {
                 return NotFound();
-            }
+            } 
             return Ok(data);
         }
 
@@ -52,6 +54,24 @@ namespace VietjetAir.BackendAPI.Controllers
             if (GroupName == null) { return BadRequest("Cant get group"); }
             var result = await _groupPermission.UpdateGroup(GroupName, request);
             if(!result) { return BadRequest("Update failed, or field Name empty"); }
+            return Ok(result);
+        }
+
+
+
+        [HttpPost("{GroupName}")]
+        public async Task<IActionResult> AddMembers(string GroupName, [FromBody] List<Guid> listMember)
+        {
+            var result = await _groupPermission.AddGroupMember(GroupName, listMember);
+            if(result == 0) { return BadRequest("Cant add user to this group cause Group Name or Account not valid"); }
+            return Ok(result);
+        }
+
+        [HttpDelete("{GroupName}/RemoveAccount")]
+        public async Task<IActionResult> RemoveMembers(string GroupName, [FromBody] List<Guid> listMember)
+        {
+            var result = await _groupPermission.RemoveGroupMember(GroupName, listMember);
+            if (result == 0) { return BadRequest("Cant excute action to this group cause Group Name or Account not valid"); }
             return Ok(result);
         }
 

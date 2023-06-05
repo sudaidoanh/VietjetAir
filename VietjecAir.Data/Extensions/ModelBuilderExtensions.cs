@@ -190,6 +190,17 @@ namespace VietjecAir.Data.Extensions
                 RoleId = ATTENDANT_ROLE_ID,
                 UserId = ATTENDANT_ID,
             });
+
+            modelBuilder.Entity<Entities.System>().HasData(new Entities.System
+            {
+                Id = 1,
+                Theme = "Default theme",
+                UserUpdate = "Owner@vietjetair.com",
+                CapchaEnabled = false,
+                LogoPath = "",
+                LogoSize = 1,
+                Updated = DateTime.Now,
+            });
         }
     }
 }
