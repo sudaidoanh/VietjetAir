@@ -37,3 +37,7 @@
 ## 29/5 - 1/6:
 - Integrated user rights to access API
 - Create CRUD API for group permissions including: view group list with pagination, create group, update group, remove group, view group details
+## 1/6 - 5/6:
+- Create CURD API for group permissions including: get all user account, add user account to group, remove user account from group
+- Create API configure system controller 
+- Create CU API for general setting: view present general setting, change setting: Theme, Capcha enable, Logo Image
