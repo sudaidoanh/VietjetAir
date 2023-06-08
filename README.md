@@ -3,9 +3,11 @@
 - ASP.NET CORE 6.0
 - Entity Framwork Core 7.0.5
 ## Install Packages
--- (View Models layer)
+
+<hr> -- (View Models layer)
 - FluentValidation.AspNetCore Version="11.3.0" 
-- Microsoft.AspNetCore.Http.Features Version="5.0.17" <br> <hr>
+- Microsoft.AspNetCore.Http.Features Version="5.0.17" <br> 
+<hr>
 -- (Data layer)
 - Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" 
 - Microsoft.EntityFrameworkCore" Version="7.0.5"
@@ -14,11 +16,13 @@
 - Microsoft.EntityFrameworkCore.Tools" Version="7.0.5"
 - Microsoft.Extensions.Configuration" Version="7.0.0"
 - Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0"
-- Microsoft.Extensions.Configuration.Json" Version="7.0.0" <br> <hr>
+- Microsoft.Extensions.Configuration.Json" Version="7.0.0" <br> 
+<hr>
 -- (Application layer)
 - Microsoft.AspNetCore.Http.Features" Version="5.0.17" 
 - Microsoft.IdentityModel.Tokens" Version="6.30.1" (.NET 6.0 does not support version 7.0)
-- System.IdentityModel.Tokens.Jwt" Version="6.30.1" (.NET 6.0 does not support version 7.0) <br> <hr>
+- System.IdentityModel.Tokens.Jwt" Version="6.30.1" (.NET 6.0 does not support version 7.0) <br> 
+<hr>
 -- (Backend API layer)     
 - FluentValidation.AspNetCore" Version="11.3.0" 
 - Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16"
