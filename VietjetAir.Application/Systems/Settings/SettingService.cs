@@ -23,14 +23,20 @@ namespace VietjetAir.Application.Systems.Settings
 
         public async Task<bool> ChangeGeneralSetting(string UserUpdate, ChangeGeneralSettingRequest request)
         {
+
             var system = await _context.ConfigureSystems.FindAsync(1);
+
             if(system == null) { return  false; }
+
+            await _storageService.DeleteFileAsync(system.LogoPath);
+
             system.Theme = request.Theme;
             system.CapchaEnabled = request.CapchaEnabled;
             system.LogoPath = await this.SaveFile(request.LogoImage);
             system.LogoSize = request.LogoImage.Length;
             system.Updated = DateTime.Now;
             system.UserUpdate = UserUpdate;
+            
             _context.ConfigureSystems.Update(system);
             return await _context.SaveChangesAsync() > 0;
         }

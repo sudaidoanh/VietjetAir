@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using VietjecAir.Data.EF;
 using VietjecAir.Data.Entities;
+using VietjetAir.Application.Catalog.DocumentType;
 using VietjetAir.Application.Catalog.GroupPermission;
 using VietjetAir.Application.Common;
 using VietjetAir.Application.Systems.Settings;
@@ -35,6 +36,7 @@ builder.Services.AddTransient<IStorageService, FileStorageService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>();
 builder.Services.AddTransient<ISettingService, SettingService>();
+builder.Services.AddTransient<IDocumentTypeService, DocumentTypeService>();
 builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
 

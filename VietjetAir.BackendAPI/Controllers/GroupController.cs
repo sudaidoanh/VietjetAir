@@ -57,8 +57,6 @@ namespace VietjetAir.BackendAPI.Controllers
             return Ok(result);
         }
 
-
-
         [HttpPost("{GroupName}")]
         public async Task<IActionResult> AddMembers(string GroupName, [FromBody] List<Guid> listMember)
         {
