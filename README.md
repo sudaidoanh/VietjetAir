@@ -41,3 +41,6 @@
 - Create CURD API for group permissions including: get all user account, add user account to group, remove user account from group
 - Create API configure system controller 
 - Create CU API for general setting: view present general setting, change setting: Theme, Capcha enable, Logo Image
+## 5/6 - 8/6:
+- Create document controller: configuration
+- Create CURD API for document type including: get all document type, add permission to doc type, remove group permission from doc type, get doc type detail, remove doc type, update doctype
