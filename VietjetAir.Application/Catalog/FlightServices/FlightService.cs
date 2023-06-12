@@ -28,7 +28,7 @@ namespace VietjetAir.Application.Catalog.FlightServices
             var flight = new Flight()
             {
                 FlightNo = request.FlightInfo.FlightNo,
-                Date = (request.FlightInfo.Date).ToDateTime(new TimeOnly(0,0,0)),
+                Date = (new DateOnly(request.FlightInfo.Year, request.FlightInfo.Month, request.FlightInfo.Day)).ToDateTime(new TimeOnly(0,0,0)),
                 PointofLoading = request.FlightInfo.PointofLoading,
                 PointofUnloading = request.FlightInfo.PointofUnloading
             };

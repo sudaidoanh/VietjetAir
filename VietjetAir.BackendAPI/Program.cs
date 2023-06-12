@@ -40,12 +40,14 @@ builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>()
 builder.Services.AddTransient<ISettingService, SettingService>();
 builder.Services.AddTransient<IDocumentTypeService, DocumentTypeService>();
 builder.Services.AddTransient<IFlightService, FlightService>();
-//builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
-//builder.Services.AddTransient<IValidator<FlightInfoModel>, FlightInfoModelValidator>();
+
+/*builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+builder.Services.AddTransient<IValidator<FlightInfoModel>, FlightInfoModelValidator>();*/
 
 builder.Services.AddControllers();
 
-builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters().AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters().AddValidatorsFromAssemblyContaining<AddFlightDocsRequestValidator>();
+/*builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters().AddValidatorsFromAssemblyContaining<LoginRequestValidator>();*/
 
 builder.Services.AddSwaggerGen(c =>
 {

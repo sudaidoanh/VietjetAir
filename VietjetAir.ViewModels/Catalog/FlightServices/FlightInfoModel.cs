@@ -9,7 +9,9 @@ namespace VietjetAir.ViewModels.Catalog.FlightServices
     public class FlightInfoModel
     {
         public string FlightNo { get; set; }
-        public DateOnly Date { get; set; }
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
         public string PointofLoading { get; set; }
         public string PointofUnloading { get; set; }
     }

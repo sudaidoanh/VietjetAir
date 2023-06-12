@@ -47,4 +47,5 @@
 - Create CURD API for document type including: get all document type, add permission to doc type, remove group permission from doc type, get doc type detail, remove doc type, update doctype
 ## 8/6 - 12/6:
 - Create flight controller
+- Create form validator when add flight infomation
 - Create API for add and get landing and take-off points, create new document with media file storaged in server, folder wwwroot/MediaScr/
