@@ -13,7 +13,7 @@ namespace VietjecAir.Data.Entities
         public string Note { get; set; }
         public string Creator { get; set; }
         public int DocumentTypeId { get; set; }
-        public int FlightId { get; set; }
+        public string FlightId { get; set; }
         public List<DocumentDetail> Details { get; set; }
 
     }

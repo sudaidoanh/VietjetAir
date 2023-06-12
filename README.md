@@ -2,6 +2,7 @@
 ## Technology
 - ASP.NET CORE 6.0
 - Entity Framwork Core 7.0.5
+- MySQL Server database
 ## Install Packages
 ### (View Models layer)
 - FluentValidation.AspNetCore Version="11.3.0" 
@@ -29,7 +30,7 @@
 - Add Swagger to application to manage the API
 - Add Authorization header to Swagger
 - Create form fluent validation for email and password
-- Create login API Authenticate with email and password (AspNetCore.Identity),  Attempts a password sign in for a user. If the data matches the database, login successfully, the server will return a jwt
+- Create login API Authenticate with email and password (AspNetCore.Identity), Attempts a password sign in for a user. If the data matches the database, login successfully, the server will return a jwt
 (The user account wought be locked if the sign in fails.) 
 ## 25/5 - 29/5:
 - Create Database relates to user requiments 
@@ -44,3 +45,6 @@
 ## 5/6 - 8/6:
 - Create document controller: configuration
 - Create CURD API for document type including: get all document type, add permission to doc type, remove group permission from doc type, get doc type detail, remove doc type, update doctype
+## 8/6 - 12/6:
+- Create flight controller
+- Create API for add and get landing and take-off points, create new document with media file storaged in server, folder wwwroot/MediaScr/

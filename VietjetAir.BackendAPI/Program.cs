@@ -8,11 +8,13 @@ using Microsoft.OpenApi.Models;
 using VietjecAir.Data.EF;
 using VietjecAir.Data.Entities;
 using VietjetAir.Application.Catalog.DocumentType;
+using VietjetAir.Application.Catalog.FlightServices;
 using VietjetAir.Application.Catalog.GroupPermission;
 using VietjetAir.Application.Common;
 using VietjetAir.Application.Systems.Settings;
 using VietjetAir.Application.Systems.Users;
 using VietjetAir.Utilities.Constants;
+using VietjetAir.ViewModels.Catalog.FlightServices;
 using VietjetAir.ViewModels.Systems.Users;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,8 +39,9 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>();
 builder.Services.AddTransient<ISettingService, SettingService>();
 builder.Services.AddTransient<IDocumentTypeService, DocumentTypeService>();
-builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
-
+builder.Services.AddTransient<IFlightService, FlightService>();
+//builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+//builder.Services.AddTransient<IValidator<FlightInfoModel>, FlightInfoModelValidator>();
 
 builder.Services.AddControllers();
 

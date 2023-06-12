@@ -17,6 +17,8 @@ namespace VietjecAir.Data.Configurations
             builder.HasKey(x => x.FlightNo);
             builder.Property(x => x.PointofLoading).IsRequired();
             builder.Property(x => x.PointofUnloading).IsRequired();
+            builder.Property(x => x.TimeLoading).IsRequired(false);
+            builder.Property(x => x.TimeUnloading).IsRequired(false);
         }
     }
 }
