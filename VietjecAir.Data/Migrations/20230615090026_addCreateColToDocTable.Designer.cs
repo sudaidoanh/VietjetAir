@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VietjecAir.Data.EF;
 
@@ -11,9 +12,11 @@ using VietjecAir.Data.EF;
 namespace VietjecAir.Data.Migrations
 {
     [DbContext(typeof(VietjetAirDbContext))]
-    partial class VietjetAirDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230615090026_addCreateColToDocTable")]
+    partial class addCreateColToDocTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

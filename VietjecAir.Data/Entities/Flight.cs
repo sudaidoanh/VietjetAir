@@ -14,6 +14,6 @@ namespace VietjecAir.Data.Entities
         public string TimeUnloading { get; set; }
         public string PointofLoading { get; set; }
         public string PointofUnloading { get; set; }
-
+        public List<Document> Documents { get; set; }
     }
 }

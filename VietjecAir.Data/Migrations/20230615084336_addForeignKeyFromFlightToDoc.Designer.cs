@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VietjecAir.Data.EF;
 
@@ -11,9 +12,11 @@ using VietjecAir.Data.EF;
 namespace VietjecAir.Data.Migrations
 {
     [DbContext(typeof(VietjetAirDbContext))]
-    partial class VietjetAirDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230615084336_addForeignKeyFromFlightToDoc")]
+    partial class addForeignKeyFromFlightToDoc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,7 +183,7 @@ namespace VietjecAir.Data.Migrations
                         {
                             Id = new Guid("944bd118-0128-412b-b6af-0e96921d64b7"),
                             Action = "Owner",
-                            ConcurrencyStamp = "9e814990-ecf2-49f0-b34b-413d59fe4f0d",
+                            ConcurrencyStamp = "2d42d459-7042-4a06-bc04-c8ec223df3dd",
                             Description = "Owner have full access to the system and use all existing functions, manage and decentralize user classes include administrator.",
                             Name = "Owner",
                             NormalizedName = "Owner"
@@ -189,7 +192,7 @@ namespace VietjecAir.Data.Migrations
                         {
                             Id = new Guid("4857318f-ea9e-4250-aaf2-5b0344e1486e"),
                             Action = "Administrators",
-                            ConcurrencyStamp = "27f3fb02-220b-4249-b1e8-06919035f0d6",
+                            ConcurrencyStamp = "2f2ec6ff-b6ac-484e-b86d-ed14a29375dc",
                             Description = "Administrators have full access to the system and use all existing functions, manage and decentralize user classes.",
                             Name = "Administrators",
                             NormalizedName = "Administrators"
@@ -198,7 +201,7 @@ namespace VietjecAir.Data.Migrations
                         {
                             Id = new Guid("1706e285-cee8-495e-8f1d-4f3db18e975b"),
                             Action = "GOStaff",
-                            ConcurrencyStamp = "4a7abf8c-f63d-4d7e-b701-46b71349749c",
+                            ConcurrencyStamp = "3bd3a7df-eec1-4959-935e-6bfff52906c3",
                             Description = "Functions: view information, update and upload documents, fill out document information; see the history of changes to the document… users can set up functions that allow viewing or editing of documents for specific groups of users.",
                             Name = "GOStaff",
                             NormalizedName = "GOStaff"
@@ -207,7 +210,7 @@ namespace VietjecAir.Data.Migrations
                         {
                             Id = new Guid("6ff5fb0c-912a-446f-bf64-fcec3532dd01"),
                             Action = "Pilot",
-                            ConcurrencyStamp = "3bb176d1-c471-45cb-8670-9008822cfb86",
+                            ConcurrencyStamp = "624691ca-38b8-4d0b-bd04-b5cfe149a6ad",
                             Description = "Access to the system to view the document information about the assigned flight, edit and update the document information when authorized.",
                             Name = "Pilot",
                             NormalizedName = "Pilot"
@@ -216,7 +219,7 @@ namespace VietjecAir.Data.Migrations
                         {
                             Id = new Guid("f5917976-7e77-4190-8561-f4366f1cf612"),
                             Action = "Attendant",
-                            ConcurrencyStamp = "77057b6e-70ce-4c52-af5a-47e77b4d5b20",
+                            ConcurrencyStamp = "1db9d4fd-2f22-48a0-8c0b-d1c85b3e36b7",
                             Description = "Attendant access to the system to view the document information about the assigned flight, edit and update the document information when authorized.",
                             Name = "Attendant",
                             NormalizedName = "Attendant"
@@ -295,14 +298,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("6d8cc029-fe13-4a37-b241-39dafbbc94ba"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "f0cc649a-4977-4af0-af93-aec4219fdf38",
+                            ConcurrencyStamp = "e50e4664-11af-4b88-b0b0-0ef027f14c20",
                             Email = "owner@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "Owner",
                             LockoutEnabled = false,
                             NormalizedEmail = "owner@vietjetair.com",
                             NormalizedUserName = "owner",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP+fkfo138ZBKpMVU7okcWAyu7FaN46C+yIhryF9Ryj/UovOtYhWRVKPr6NCg0yucw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJTLGKC8BpVOKlvCD6LYltFAtQ6TwCYM85nPQVRaHaeWxN4Cq9wVRnLFqyPNEG1/3Q==",
                             PhoneNumber = "0223456789",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -314,14 +317,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("612e9def-cd18-4210-9f71-0101ea527cb3"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "86bfc428-6a50-483e-9a15-68754ff4b145",
+                            ConcurrencyStamp = "086a0a20-2230-4157-84e6-d56fd9d77f51",
                             Email = "admin@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "Administrators",
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@vietjetair.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK2W6/6FEG5PwA9+O9ipsi6TjAqM4++f4oLLlKVP4xPCbIFisY02YtfIRn69PeCEjQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDD+P7qmmLagDo6o9bCCPAqEO/j8ifzsSqn8Vyg2NQusGiLGGW1gAT8NJVex82lnpQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -333,14 +336,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("7407b801-0f91-4732-9179-c24d56a353b5"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "d3099453-9777-4f1f-a12c-ff9d88d3d7f8",
+                            ConcurrencyStamp = "77a3c3f9-c6c9-4fb5-a1d4-b32ae309ce72",
                             Email = "gostaff@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "GO Staff",
                             LockoutEnabled = false,
                             NormalizedEmail = "gostaff@vietjetair.com",
                             NormalizedUserName = "GOStaff",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFNPwcAmZJKM4QVCWK/cm0JilIWUwlyvLtq3I9z2jBPqwvxJLH7fXVHPiit67Blpcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELMJqqRDxoZGtDnl6RO5WPwrDKvT8SYlcGP46Rp7qV7+VletXBZtimwHivBRAbg7aQ==",
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -352,14 +355,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("f8814825-284e-44d0-ac12-c69a097ca81c"),
                             AccessFailedCount = 10,
                             Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "b935c259-528a-4c5f-a452-4a1838c46237",
+                            ConcurrencyStamp = "f8f22f73-8f46-45b1-8ffb-962f912e8a45",
                             Email = "pilot@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "Pilot",
                             LockoutEnabled = false,
                             NormalizedEmail = "pilot@vietjetair.com",
                             NormalizedUserName = "pilot",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHBH49JNW3nwGH+cDShii8MC8/su/wnyXNNOWGXdiM3N74/DytMFKiXi+aQnKdsWGw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMXJITrkSkfRjPMX2IVKYLgj7MZFm7Oc23Kw7PHXrjMEsmUeOWmQHHLJksq474SEgg==",
                             PhoneNumber = "0122222222",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -371,14 +374,14 @@ namespace VietjecAir.Data.Migrations
                             Id = new Guid("73b3e5f4-20a8-4db4-8cb7-8a7151429cb5"),
                             AccessFailedCount = 10,
                             Address = "Dong Ha Quang Tri",
-                            ConcurrencyStamp = "0d80532d-bf7b-4c75-8b4c-948e7acad699",
+                            ConcurrencyStamp = "402486f8-cbd3-4eff-ab00-e6e302454f57",
                             Email = "attendant@vietjetair.com",
                             EmailConfirmed = true,
                             FullName = "Attendant ",
                             LockoutEnabled = false,
                             NormalizedEmail = "attendant@vietjetair.com",
                             NormalizedUserName = "attendant",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAeGEOCqUz/nYINi1MfQjIMklpU9sCOzVEm8qhkhqdMXW/1tfWmEXXQv2a3+BBQkVQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBhpC975YWLI+yqTjmnmEaeFq6OV9avDw5uxWbFo8YvxR5yQ30Wt3SKdKcqmdd03gg==",
                             PhoneNumber = "0967145696",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
@@ -394,9 +397,6 @@ namespace VietjecAir.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
                         .IsRequired()
@@ -653,7 +653,7 @@ namespace VietjecAir.Data.Migrations
                             LogoPath = "",
                             LogoSize = 1L,
                             Theme = "Default theme",
-                            Updated = new DateTime(2023, 6, 15, 16, 0, 26, 751, DateTimeKind.Local).AddTicks(9172),
+                            Updated = new DateTime(2023, 6, 15, 15, 43, 36, 757, DateTimeKind.Local).AddTicks(2567),
                             UserUpdate = "Owner@vietjetair.com"
                         });
                 });

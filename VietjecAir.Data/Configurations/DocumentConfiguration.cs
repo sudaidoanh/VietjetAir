@@ -14,9 +14,11 @@ namespace VietjecAir.Data.Configurations
         public void Configure(EntityTypeBuilder<Document> builder)
         {
             builder.ToTable("Documents");
+            builder.HasKey(e => e.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(128);
             builder.Property(x => x.Creator).IsRequired();
+            builder.HasOne(x => x.Flight).WithMany(c => c.Documents).HasForeignKey(c => c.FlightId);
         }
     }
 }

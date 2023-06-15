@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VietjetAir.ViewModels.Catalog.FlightServices;
+using VietjetAir.ViewModels.Common;
 
 namespace VietjetAir.Application.Catalog.FlightServices
 {
@@ -12,5 +13,8 @@ namespace VietjetAir.Application.Catalog.FlightServices
         Task<bool> AddPoint(PointModel request);
         Task<List<PointModel>> GetPoint();
         Task<bool> AddFlightDocs(string Creator, AddFlightDocsRequest request);
+        Task<ResultModel<AllFlightModel>> GetAllFlightDocs(GetAllFlightPagingRequest request);
+        Task<List<DocumentTypeSubFlightModel>> GetDocumentTypeSubFlight(string FlightNo);
+        Task<string> GetDocTypeName(int DocTypeId);
     }
 }

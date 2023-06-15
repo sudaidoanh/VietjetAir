@@ -49,3 +49,6 @@
 - Create flight controller
 - Create form validator when add flight infomation
 - Create API for add and get landing and take-off points, create new document with media file storaged in server, folder wwwroot/MediaScr/
+## 12/6 - 15/6:
+- Create form validator for input form when enter text
+- Create API for get all flight docs, remove flight docs, get detail a flight doc

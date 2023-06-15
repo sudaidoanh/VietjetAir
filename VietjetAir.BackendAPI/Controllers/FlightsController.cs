@@ -25,7 +25,7 @@ namespace VietjetAir.BackendAPI.Controllers
         public async Task<IActionResult> AddPoint([FromForm] PointModel request)
         {
             var result = await _flightService.AddPoint(request);
-            if(result == false) { return BadRequest(result); }
+            if (result == false) { return BadRequest(result); }
             return Ok(result);
         }
 
@@ -40,7 +40,7 @@ namespace VietjetAir.BackendAPI.Controllers
         [HttpPost("Document")]
         public async Task<IActionResult> AddFlightDocs([FromForm] AddFlightDocsRequest request)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -48,11 +48,44 @@ namespace VietjetAir.BackendAPI.Controllers
             string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")).Value;
             var user = await _userManager.FindByEmailAsync(emailUser);
             var result = await _flightService.AddFlightDocs(user.Email, request);
-            if(!result)
+            if (!result)
             {
                 return BadRequest("Cant add, get Flight infomation or document");
             }
             return Ok(result);
+        }
+
+        [HttpGet("Documents")]
+        public async Task<IActionResult> GetAllFlightDocs([FromQuery] GetAllFlightPagingRequest request)
+        {
+            var data = await _flightService.GetAllFlightDocs(request);
+            if (data == null) { return BadRequest("Cant get data"); }
+            return Ok(data);
+        }
+
+        [HttpGet("Documents/{FlightNo}")]
+        public async Task<IActionResult> GetAllFlightDocs(string FlightNo, GetAllFlightPagingRequest request)
+        {
+            var data = await _flightService.GetAllFlightDocs(request);
+            if (data == null) { return BadRequest("Cant get data"); }
+            return Ok(data);
+        }
+
+        [HttpPut("Documents/{FlightNo}")]
+        public async Task<IActionResult> EditFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
+        {
+            var data = await _flightService.GetAllFlightDocs(request);
+            if (data == null) { return BadRequest("Cant get data"); }
+            return Ok(data);
+        }
+
+
+        [HttpDelete("Documents/{FlightNo}")]
+        public async Task<IActionResult> RemoveFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
+        {
+            var data = await _flightService.GetAllFlightDocs(request);
+            if (data == null) { return BadRequest("Cant get data"); }
+            return Ok(data);
         }
     }
 }

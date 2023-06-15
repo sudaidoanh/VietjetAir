@@ -10,6 +10,7 @@ using VietjecAir.Data.EF;
 using VietjecAir.Data.Entities;
 using VietjetAir.Application.Common;
 using VietjetAir.ViewModels.Catalog.FlightServices;
+using VietjetAir.ViewModels.Common;
 
 namespace VietjetAir.Application.Catalog.FlightServices
 {
@@ -48,6 +49,7 @@ namespace VietjetAir.Application.Catalog.FlightServices
                 Creator = creator,
                 DocumentTypeId = request.DocTypeId,
                 FlightId = flightId,
+                CreatedDate = DateTime.Now,
                 Details = new List<DocumentDetail>()
                 {
                     new DocumentDetail()
@@ -76,6 +78,65 @@ namespace VietjetAir.Application.Catalog.FlightServices
             };
             await _context.Points.AddAsync(point);
             return _context.SaveChanges() > 0;
+        }
+
+        public async Task<ResultModel<AllFlightModel>> GetAllFlightDocs(GetAllFlightPagingRequest request)
+        {
+            var query = from f in _context.Flights select f;
+
+            if (!string.IsNullOrEmpty(request.Keyword)) { query = query.Where(x => x.FlightNo.Contains(request.Keyword)); }
+            int totalRecord = await query.CountAsync();
+
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Include(x => x.Documents)
+                .Select(x => new AllFlightModel()
+                {
+                    FlightNo = x.FlightNo,
+                    Route = $"{x.PointofLoading} - {x.PointofUnloading}",
+                    DepartureDate = DateOnly.FromDateTime(x.Date),
+                    ToTalDocuments = x.Documents.Count(),
+                }).ToListAsync();
+
+            foreach(var d in await data)
+            {
+                d.Documents = await GetDocumentTypeSubFlight(d.FlightNo);
+            }
+
+            return new ResultModel<AllFlightModel>()
+            {
+                Items = await data,
+                TotalRecord = totalRecord
+            };
+        }
+
+        public async Task<List<DocumentTypeSubFlightModel>> GetDocumentTypeSubFlight(string FlightNo)
+        {
+            var query = from d in _context.Documents
+                        where d.FlightId.Equals(FlightNo)
+                        select d;
+            query = query.Include(x => x.Details);
+            var data = query.Select(x => new DocumentTypeSubFlightModel()
+            {
+                DocTypeId = x.Id,
+                DocumentName = x.Name,
+                CreateDate = x.CreatedDate,
+                Creator = x.Creator,
+                LatestVersion = $"1.{x.Details.Max( c => c.Version)}",
+            }).ToListAsync();
+
+            foreach(var d in await data)
+            {
+                d.Type = await this.GetDocTypeName(d.DocTypeId);
+            }
+
+            return await data;
+        }
+
+        public async Task<string> GetDocTypeName(int DocTypeId)
+        {
+            var doctype = await _context.DocumentTypes.FirstOrDefaultAsync(x => x.Id == DocTypeId);
+            return doctype.Name;
         }
 
         public async Task<List<PointModel>> GetPoint()
