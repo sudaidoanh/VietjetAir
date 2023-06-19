@@ -16,5 +16,8 @@ namespace VietjetAir.Application.Catalog.FlightServices
         Task<ResultModel<AllFlightModel>> GetAllFlightDocs(GetAllFlightPagingRequest request);
         Task<List<DocumentTypeSubFlightModel>> GetDocumentTypeSubFlight(string FlightNo);
         Task<string> GetDocTypeName(int DocTypeId);
+        Task<List<PermissionDTO>> GetPermission(int GroupId);
+        Task<List<DocsDTO>> GetDocsDTO(int DocId);
+        Task<FlightDocDetailModel> GetFlightDocDetail(string FlightNo);
     }
 }

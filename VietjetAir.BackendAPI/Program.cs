@@ -11,6 +11,7 @@ using VietjetAir.Application.Catalog.DocumentType;
 using VietjetAir.Application.Catalog.FlightServices;
 using VietjetAir.Application.Catalog.GroupPermission;
 using VietjetAir.Application.Common;
+using VietjetAir.Application.Systems.Permission;
 using VietjetAir.Application.Systems.Settings;
 using VietjetAir.Application.Systems.Users;
 using VietjetAir.Utilities.Constants;
@@ -34,6 +35,7 @@ builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
+builder.Services.AddTransient<IPermissionService, PermissionService>();
 builder.Services.AddTransient<IStorageService, FileStorageService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>();

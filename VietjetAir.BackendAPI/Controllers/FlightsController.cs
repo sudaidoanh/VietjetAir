@@ -2,8 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
+using System.Security.Claims;
 using VietjecAir.Data.Entities;
 using VietjetAir.Application.Catalog.FlightServices;
+using VietjetAir.Application.Systems.Permission;
 using VietjetAir.ViewModels.Catalog.FlightServices;
 
 namespace VietjetAir.BackendAPI.Controllers
@@ -15,9 +19,11 @@ namespace VietjetAir.BackendAPI.Controllers
     {
         private readonly IFlightService _flightService;
         private readonly UserManager<AppUser> _userManager;
-        public FlightsController(UserManager<AppUser> userManager, IFlightService flightService)
+        private readonly IPermissionService _permissionService;
+        public FlightsController(UserManager<AppUser> userManager, IPermissionService permissionService, IFlightService flightService)
         {
             _userManager = userManager;
+            _permissionService = permissionService;
             _flightService = flightService;
         }
 
@@ -45,7 +51,7 @@ namespace VietjetAir.BackendAPI.Controllers
                 return BadRequest(ModelState);
             }
             var currentUser = HttpContext.User;
-            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")).Value;
+            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
             var user = await _userManager.FindByEmailAsync(emailUser);
             var result = await _flightService.AddFlightDocs(user.Email, request);
             if (!result)
@@ -64,16 +70,31 @@ namespace VietjetAir.BackendAPI.Controllers
         }
 
         [HttpGet("Documents/{FlightNo}")]
-        public async Task<IActionResult> GetAllFlightDocs(string FlightNo, GetAllFlightPagingRequest request)
+        public async Task<IActionResult> GetFlightDocDetail(string FlightNo)
         {
-            var data = await _flightService.GetAllFlightDocs(request);
+            var currentUser = HttpContext.User;
+            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            var data = await _flightService.GetFlightDocDetail(FlightNo);
             if (data == null) { return BadRequest("Cant get data"); }
-            return Ok(data);
+
+            if ( await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read and modify")
+                || await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read only")
+                )
+            {
+
+                return Ok(data);
+                
+            }
+            return StatusCode(403, "Permission Denied");
         }
 
         [HttpPut("Documents/{FlightNo}")]
         public async Task<IActionResult> EditFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var data = await _flightService.GetAllFlightDocs(request);
             if (data == null) { return BadRequest("Cant get data"); }
             return Ok(data);
@@ -83,9 +104,19 @@ namespace VietjetAir.BackendAPI.Controllers
         [HttpDelete("Documents/{FlightNo}")]
         public async Task<IActionResult> RemoveFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
         {
+            var currentUser = HttpContext.User;
             var data = await _flightService.GetAllFlightDocs(request);
             if (data == null) { return BadRequest("Cant get data"); }
             return Ok(data);
+        }
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            var currentUser = HttpContext.User;
+            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+
+            return Ok(emailUser);
         }
     }
 }

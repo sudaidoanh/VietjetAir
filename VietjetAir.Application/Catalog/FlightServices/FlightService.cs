@@ -158,5 +158,57 @@ namespace VietjetAir.Application.Catalog.FlightServices
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
         }
+
+        public async Task<FlightDocDetailModel> GetFlightDocDetail(string FlightNo)
+        {
+            var flight = await _context.Flights.FindAsync(FlightNo);
+            if(flight == null) { return null; }
+            var doc = await _context.Documents.FirstOrDefaultAsync(x => x.FlightId.Equals(FlightNo));
+            if(doc == null) { return null; }
+            var docType = await _context.DocumentTypes.FindAsync(doc.Id);
+            var docDetail = await _context.DocumentsDetail.FirstOrDefaultAsync(x => x.DocumentId == doc.Id && x.Version == 1);
+
+            var data = new FlightDocDetailModel()
+            {
+                Date = DateOnly.FromDateTime(flight.Date),
+                PointOfLoading = flight.PointofLoading,
+                PointOfUnloading = flight.PointofUnloading,
+                TimeOfLoading = flight.TimeLoading,
+                TimeOfUnloading = flight.TimeUnloading,
+                Title = docDetail.Title,
+                Type = docType.Name,
+                CreateDate = docDetail.CreatedDate,
+                Version = $"1.{docDetail.Version}",
+                Creator = docDetail.Creator,
+                Permissions = await GetPermission(docType.Id),
+                Docs = await GetDocsDTO(doc.Id)
+            };
+            return data;
+        }
+
+        public async Task<List<PermissionDTO>> GetPermission(int DocTypeId)
+        {
+            var query = from p in _context.Permissions.Where(p => p.GroupId == DocTypeId)
+                        from g in _context.Groups.Where(g => g.Id == p.GroupId).DefaultIfEmpty()
+                        select new {p, g};
+            return await query.Select(x => new PermissionDTO()
+            {
+                GroupName = x.g.Name,
+                Permission = x.p.Permissions
+            }).ToListAsync();
+        }
+
+        public async Task<List<DocsDTO>> GetDocsDTO(int DocId)
+        {
+            var query = from d in _context.DocumentsDetail.Where(d => d.DocumentId == DocId && d.Version != 1) select d;
+            return await query.Select(x => new DocsDTO()
+            {
+                DocPath = x.FilePath,
+                CreateDate = DateOnly.FromDateTime(x.CreatedDate),
+                Creator = x.Creator,
+                DocVer = $"1.{x.Version}"
+            }).ToListAsync();
+
+        }
     }
 }
