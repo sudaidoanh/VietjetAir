@@ -91,6 +91,8 @@ namespace VietjetAir.BackendAPI.Controllers
         [HttpPut("Documents/{FlightNo}")]
         public async Task<IActionResult> EditFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
         {
+            var currentUser = HttpContext.User;
+            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -105,6 +107,8 @@ namespace VietjetAir.BackendAPI.Controllers
         public async Task<IActionResult> RemoveFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
         {
             var currentUser = HttpContext.User;
+            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+
             var data = await _flightService.GetAllFlightDocs(request);
             if (data == null) { return BadRequest("Cant get data"); }
             return Ok(data);

@@ -19,6 +19,12 @@ namespace VietjetAir.Application.Systems.Permission
             _userManager = userManager;
             _context = context;
         }
+
+        public Task<bool> CheckPermissionOnDocs(string User, string Permission)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> CheckPermissionOnDocsWithFlightNo(string User, string FlightNo, string Permission)
         {
             var user =  await _userManager.FindByEmailAsync(User);

@@ -8,6 +8,7 @@ namespace VietjetAir.Application.Systems.Permission
 {
     public interface IPermissionService
     {
+        Task<bool> CheckPermissionOnDocs(string User, string Permission);
         Task<bool> CheckPermissionOnDocsWithFlightNo(string User, string FlightNo, string Permission);
     }
 }
