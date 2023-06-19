@@ -52,3 +52,5 @@
 ## 12/6 - 15/6:
 - Create form validator for input form when enter text
 - Create API for get all flight docs, remove flight docs, get detail a flight doc
+## 15/6 - 19/6:
+- Create middleware that navigates each user's access permission rights based on the user's login jwt
