@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using VietjetAir.Application.Systems.Users;
 using VietjetAir.ViewModels.Systems.Users;
 
@@ -11,9 +12,11 @@ namespace VietjetAir.BackendAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService)
+        private readonly ITokenManager _tokenManager;
+        public UsersController(IUserService userService, ITokenManager tokenManager)
         {
             _userService = userService;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost("authenticate")]
@@ -32,6 +35,14 @@ namespace VietjetAir.BackendAPI.Controllers
                 return BadRequest("Email or password is wrong.");
             }
             return Ok(resultToken);
+        }
+
+        [HttpPost("Tokens/Cancel")]
+        public async Task<IActionResult> CancelAccessToken()
+        {
+            await _tokenManager.DeactivateCurrentAsync();
+
+            return Unauthorized();
         }
     }
 }

@@ -11,6 +11,7 @@ using VietjetAir.Application.Catalog.DocumentType;
 using VietjetAir.Application.Catalog.FlightServices;
 using VietjetAir.Application.Catalog.GroupPermission;
 using VietjetAir.Application.Common;
+using VietjetAir.Application.Middleware;
 using VietjetAir.Application.Systems.Permission;
 using VietjetAir.Application.Systems.Settings;
 using VietjetAir.Application.Systems.Users;
@@ -35,6 +36,9 @@ builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 
+builder.Services.AddTransient<TokenManagerMiddleware>();
+builder.Services.AddTransient<ITokenManager, TokenManager>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IPermissionService, PermissionService>();
 builder.Services.AddTransient<IStorageService, FileStorageService>();
 builder.Services.AddTransient<IUserService, UserService>();
@@ -42,6 +46,9 @@ builder.Services.AddTransient<IGroupPermissionService, GroupPermissionService>()
 builder.Services.AddTransient<ISettingService, SettingService>();
 builder.Services.AddTransient<IDocumentTypeService, DocumentTypeService>();
 builder.Services.AddTransient<IFlightService, FlightService>();
+
+builder.Services.AddDistributedMemoryCache();
+
 
 /*builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 builder.Services.AddTransient<IValidator<FlightInfoModel>, FlightInfoModelValidator>();*/
@@ -124,6 +131,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseAuthentication();
+
+app.UseMiddleware<TokenManagerMiddleware>();
 
 app.UseRouting();
 

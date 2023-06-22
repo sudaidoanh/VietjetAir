@@ -54,3 +54,8 @@
 - Create API for get all flight docs, remove flight docs, get detail a flight doc
 ## 15/6 - 19/6:
 - Create middleware that navigates each user's access permission rights based on the user's login jwt
+## 19/6 - 22/6: 
+- Create API for Setting Services as required including: view user list, user account details, delete, edit, reset password, change owner account
+- Terminate the user session: the user is logged out of the system and cannot log in until the owner/admin reinstalls the role
+- Use JWT cancelling to log out the user's session
+## Unfinished: send email

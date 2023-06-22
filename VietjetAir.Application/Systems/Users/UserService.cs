@@ -39,6 +39,7 @@ namespace VietjetAir.Application.Systems.Users
             if (!result.Succeeded) return null;
 
             var roles = await _userManager.GetRolesAsync(user);
+            if(!roles.Any()) { return null; }
             var claims = new[]
             {
                 new Claim(ClaimTypes.Email, request.Email),

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,17 +31,25 @@ namespace VietjetAir.BackendAPI.Controllers
         [HttpPost("Point")]
         public async Task<IActionResult> AddPoint([FromForm] PointModel request)
         {
-            var result = await _flightService.AddPoint(request);
-            if (result == false) { return BadRequest(result); }
-            return Ok(result);
+            var currentUser = HttpContext.User;
+            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+
+            if (await _permissionService.CheckPermission(emailUser, "Read and modify"))
+            {
+                var result = await _flightService.AddPoint(request);
+                if (result == false) { return BadRequest(result); }
+                return Ok(result);
+            }
+            return StatusCode(403, "Permission Denied");
         }
 
         [HttpGet("Point")]
-        public async Task<IActionResult> AddPoint()
+        public async Task<IActionResult> GetPoint()
         {
             var data = await _flightService.GetPoint();
             if (data == null) { return BadRequest("Cant get data"); }
             return Ok(data);
+
         }
 
         [HttpPost("Document")]
@@ -53,12 +62,19 @@ namespace VietjetAir.BackendAPI.Controllers
             var currentUser = HttpContext.User;
             string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
             var user = await _userManager.FindByEmailAsync(emailUser);
-            var result = await _flightService.AddFlightDocs(user.Email, request);
-            if (!result)
+
+            if (await _permissionService.CheckPermission(emailUser, "Read and modify"))
             {
-                return BadRequest("Cant add, get Flight infomation or document");
+                var result = await _flightService.AddFlightDocs(user.Email, request);
+                if (!result)
+                {
+                    return BadRequest("Cant add, get Flight infomation or document");
+                }
+                return Ok(result);
             }
-            return Ok(result);
+            return StatusCode(403, "Permission Denied");
+
+
         }
 
         [HttpGet("Documents")]
@@ -66,6 +82,7 @@ namespace VietjetAir.BackendAPI.Controllers
         {
             var data = await _flightService.GetAllFlightDocs(request);
             if (data == null) { return BadRequest("Cant get data"); }
+
             return Ok(data);
         }
 
@@ -74,16 +91,14 @@ namespace VietjetAir.BackendAPI.Controllers
         {
             var currentUser = HttpContext.User;
             string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-            var data = await _flightService.GetFlightDocDetail(FlightNo);
-            if (data == null) { return BadRequest("Cant get data"); }
 
             if ( await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read and modify")
                 || await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read only")
                 )
             {
-
+                var data = await _flightService.GetFlightDocDetail(FlightNo);
+                if (data == null) { return BadRequest("Cant get data"); }
                 return Ok(data);
-                
             }
             return StatusCode(403, "Permission Denied");
         }
@@ -93,34 +108,39 @@ namespace VietjetAir.BackendAPI.Controllers
         {
             var currentUser = HttpContext.User;
             string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-            if (!ModelState.IsValid)
+
+            if (await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read and modify")
+                || await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read only")
+                )
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var data = await _flightService.GetAllFlightDocs(request);
+                if (data == null) { return BadRequest("Cant get data"); }
+                return Ok(data);
             }
-            var data = await _flightService.GetAllFlightDocs(request);
-            if (data == null) { return BadRequest("Cant get data"); }
-            return Ok(data);
+            return StatusCode(403, "Permission Denied");
         }
 
 
         [HttpDelete("Documents/{FlightNo}")]
-        public async Task<IActionResult> RemoveFlightDoc(string FlightNo, GetAllFlightPagingRequest request)
+        public async Task<IActionResult> RemoveFlightDoc(string FlightNo)
         {
             var currentUser = HttpContext.User;
             string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-
-            var data = await _flightService.GetAllFlightDocs(request);
+            var data = await _flightService.GetFlightDocDetail(FlightNo);
             if (data == null) { return BadRequest("Cant get data"); }
-            return Ok(data);
-        }
 
-        [HttpGet("test")]
-        public async Task<IActionResult> Test()
-        {
-            var currentUser = HttpContext.User;
-            string emailUser = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-
-            return Ok(emailUser);
+            if (await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read and modify")
+                || await _permissionService.CheckPermissionOnDocsWithFlightNo(emailUser, FlightNo, "Read only")
+                )
+            {
+                return Ok(data);
+            }
+            return StatusCode(403, "Permission Denied");
         }
     }
 }

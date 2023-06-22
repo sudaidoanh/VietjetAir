@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VietjecAir.Data.Entities;
 
 namespace VietjecAir.Data.Extensions
@@ -28,6 +23,9 @@ namespace VietjecAir.Data.Extensions
 
             var ATTENDANT_ROLE_ID = new Guid("F5917976-7E77-4190-8561-F4366F1CF612");
             var ATTENDANT_ID = new Guid("73B3E5F4-20A8-4DB4-8CB7-8A7151429CB5");
+
+            var USER_ID = new Guid("82A52DD8-C50A-430A-A3DE-87135F988D18");
+            var USER_ROLE_ID = new Guid("F4F1F7F0-C836-4F7B-9D74-8B43CB6BD269");
 
             modelBuilder.Entity<AppRole>().HasData(new AppRole()
             {
@@ -63,6 +61,15 @@ namespace VietjecAir.Data.Extensions
                 NormalizedName = "Pilot",
                 Description = "Access to the system to view the document information about the assigned flight, edit and update the document information when authorized.",
                 Action = "Pilot",
+            });
+
+            modelBuilder.Entity<AppRole>().HasData(new AppRole()
+            {
+                Id = USER_ID,
+                Name = "User",
+                NormalizedName = "User",
+                Description = "User can logging into system",
+                Action = "User",
             });
 
             modelBuilder.Entity<AppRole>().HasData(new AppRole()
@@ -146,6 +153,23 @@ namespace VietjecAir.Data.Extensions
 
             modelBuilder.Entity<AppUser>().HasData(new AppUser()
             {
+                Id = USER_ID,
+                UserName = "user",
+                NormalizedUserName = "user",
+                Email = "user@vietjetair.com",
+                NormalizedEmail = "user@vietjetair.com",
+                AccessFailedCount = 10,
+                PhoneNumber = "12312312412",
+                PhoneNumberConfirmed = true,
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "1234567a"),
+                SecurityStamp = string.Empty,
+                FullName = "user",
+                Address = "Ha Noi City",
+            });
+
+            modelBuilder.Entity<AppUser>().HasData(new AppUser()
+            {
                 Id = ATTENDANT_ID,
                 UserName = "attendant",
                 NormalizedUserName = "attendant",
@@ -189,6 +213,12 @@ namespace VietjecAir.Data.Extensions
             {
                 RoleId = ATTENDANT_ROLE_ID,
                 UserId = ATTENDANT_ID,
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = USER_ROLE_ID,
+                UserId = USER_ID,
             });
 
             modelBuilder.Entity<Entities.System>().HasData(new Entities.System

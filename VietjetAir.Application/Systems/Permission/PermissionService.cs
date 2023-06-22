@@ -20,15 +20,23 @@ namespace VietjetAir.Application.Systems.Permission
             _context = context;
         }
 
-        public Task<bool> CheckPermissionOnDocs(string User, string Permission)
+        public async Task<bool> CheckPermission(string User, string Permission)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(User);
+            var role = await _userManager.GetRolesAsync(user);
+            if (role == null) return false;
+            foreach (var x in role)
+            {
+                if (x.Equals("Administrators") || x.Equals("Owner") || x.Equals("GOStaff")) return true;
+            }
+            return false;
         }
 
         public async Task<bool> CheckPermissionOnDocsWithFlightNo(string User, string FlightNo, string Permission)
         {
             var user =  await _userManager.FindByEmailAsync(User);
             var role = await _userManager.GetRolesAsync(user);
+            if(role == null) return false;
             foreach(var x in role)
             {
                 if (x.Equals("Administrators") || x.Equals("Owner")) return true;
@@ -47,6 +55,7 @@ namespace VietjetAir.Application.Systems.Permission
                 {
                     if(x.GroupId == y)
                     {
+                        if (x.Permissions.Equals("Read and modify")) return true;
                         if (Permission.Equals(x.Permissions)) return true;
                     }
                 }

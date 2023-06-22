@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace VietjetAir.ViewModels.Systems.Settings
 {
-    public class GetGeneralSettingRequest
+    public class ChangingOwnerAccountRequest
     {
-        public string Theme { get; set; }
-        public string LogoPath { get; set; }
-        public bool CapchaEnabled { get; set; }
+        public string Account { get; set; }
+        public string CurrentOwnerPassword { get; set; }
     }
 }
