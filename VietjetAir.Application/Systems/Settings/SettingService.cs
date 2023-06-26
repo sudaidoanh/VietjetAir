@@ -64,9 +64,9 @@ namespace VietjetAir.Application.Systems.Settings
             var ownerRole = await _context.UserRoles.FirstOrDefaultAsync(x => x.UserId.Equals(currentOwner));
             var userRole = await _context.UserRoles.FirstOrDefaultAsync(x => x.UserId.Equals(user));
 
-            var _userRole = await _roleManager.FindByNameAsync("User");
-            ownerRole.RoleId = _userRole.Id;
-            userRole.RoleId = ownerRole.RoleId;
+            var _userRole = await _context.AppRoles.FirstOrDefaultAsync(x => x.Name.Equals("User"));
+            ownerRole.UserId = userRole.UserId;
+            userRole.UserId = ownerRole.UserId;
 
             _context.UserRoles.Update(ownerRole);
             _context.UserRoles.Update(userRole);
