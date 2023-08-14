@@ -1,4 +1,5 @@
-# FlightDocs System: Flight Docs System for Vietjet Air is a project that simulates the actual project of the document management project for pilots and crew about VietjetAir's flights and passengers. At the same time, the system administrator can through the system and the granted rights to manage information related to the types of users, information and documents on the system through the API developed for different functions.
+# FlightDocs System: 
+Flight Docs System for Vietjet Air is a project that simulates the actual project of the document management project for pilots and crew about VietjetAir's flights and passengers. At the same time, the system administrator can through the system and the granted rights to manage information related to the types of users, information and documents on the system through the API developed for different functions.
 ## Technology
 - C#
 - ASP.NET CORE 6.0
