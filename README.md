@@ -1,10 +1,23 @@
-# FlightDocs System
+# FlightDocs System: Flight Docs System for Vietjet Air is a project that simulates the actual project of the document management project for pilots and crew about VietjetAir's flights and passengers. At the same time, the system administrator can through the system and the granted rights to manage information related to the types of users, information and documents on the system through the API developed for different functions.
 ## Technology
 - C#
 - ASP.NET CORE 6.0
-- .NET MVC
+- .NET MVC, OAuth2, Authentication Jwt Bearer, Swashbuckle
 - Entity Framwork Core 7.0.5
-- MySQL Server database
+- SQL Server database
+## Development process:
+- Analyze business and business requirements,
+- Design database,
+- Design system architecture,
+- API Development
+- Unit test, debug and fixbug
+## Functions:
+- Login, authenticate, return access token, verify token, role
+- CRUD api for document management, document search, document group search, pagination
+- CRUD api for user group management, user group access verification, user search, pagination
+- Terminate user session, change owner account, reset user's password, information sent to user email
+- Integrate and call API on the system
+- Import flight document excel file, import/export user list
 ## Install Packages
 ### (View Models layer)
 - FluentValidation.AspNetCore Version="11.3.0" 
